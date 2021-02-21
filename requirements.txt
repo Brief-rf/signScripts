@@ -53,3 +53,4 @@ pdfminer.six==20200517;python_version>="3.5"
 rsa
 aliyun-python-sdk-alidns==2.6.19
 aliyun-python-sdk-core==2.13.29
+requests
