@@ -21,7 +21,6 @@ class Textnow:
     self.url = "https://www.textnow.com/login"
 
   def send_text(self):
-   cookie = {}
 
     #profile = webdriver.FirefoxProfile()
     #proxy = '127.0.0.1:10808'
@@ -42,6 +41,7 @@ class Textnow:
     #profile.update_preferences()
     
     #https://github.com/mozilla/geckodriver/releases
+    cookie = {}
     options = webdriver.FirefoxOptions()
     options.add_argument('-headless')  # 无头参数
     #options.add_argument('-private')  # 隐身模式
