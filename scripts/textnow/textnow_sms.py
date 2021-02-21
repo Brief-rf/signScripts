@@ -71,13 +71,13 @@ class Textnow:
         pass
     
     # 分辨率 1920*1080
-    driver.set_window_size(1920,1080)
-    time.sleep(10)
+#     driver.set_window_size(1920,1080)
+#     time.sleep(10)
 
     #presence_of_element_located： 当我们不关心元素是否可见，只关心元素是否存在在页面中。
     #visibility_of_element_located： 当我们需要找到元素，并且该元素也可见。
     
-    WebDriverWait(driver, 3).until(EC.visibility_of_element_located((By.XPATH, "//input[@name='username']")))
+#     WebDriverWait(driver, 3).until(EC.visibility_of_element_located((By.XPATH, "//input[@name='username']")))
     uname_box = driver.find_element_by_xpath("//input[@name='username']")
     pass_box = driver.find_element_by_xpath("//input[@name='password']")
     uname_box.send_keys(self.TN_USER)
@@ -88,11 +88,17 @@ class Textnow:
 
     #显性等待，每隔3s检查一下条件是否成立
     try:
-      WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.XPATH, "//div[@class='notification-priming-modal']")))
+      WebDriverWait(driver, 3).until(EC.visibility_of_element_located((By.XPATH, "//button[@id='newText']")))
     except:
       pass
 
     print(u'登录成功')
+    uid = driver.get_cookie('__cfduid')['value']
+    sid = driver.get_cookie('connect.sid')['value']
+    cookie['__cfduid'] = uid
+    cookie['connect.sid'] = sid
+    print("*********************************")
+    print(cookie)
     # 隐性等待,最长等待30秒
     driver.implicitly_wait(30)
 
