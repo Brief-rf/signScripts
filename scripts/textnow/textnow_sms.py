@@ -21,6 +21,7 @@ class Textnow:
     self.url = "https://www.textnow.com/login"
 
   def send_text(self):
+   cookie = {}
 
     #profile = webdriver.FirefoxProfile()
     #proxy = '127.0.0.1:10808'
