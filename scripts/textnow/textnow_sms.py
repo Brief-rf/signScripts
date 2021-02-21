@@ -4,7 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
+import requests
 import os
 import time
 
@@ -112,114 +112,41 @@ class Textnow:
     driver.execute_script("$('.modal').remove();")
     time.sleep(2)
     
-    for phone in self.PHONE_NUMBER.split(','):
-      try:
-      
-        print (u'开始给%s发短信' % (phone.replace(''.join(list(phone)[-4:]),'****')))
-        
-        #点击 新建短信按钮
-        try:
-          new_text_btn = driver.find_element_by_id("newText")
-          if new_text_btn.is_displayed():
-            new_text_btn.click()
-          else:
-            driver.execute_script("arguments[0].scrollIntoView();", new_text_btn)
-            if new_text_btn.is_displayed():
-              new_text_btn.click()
-            else:
-              driver.execute_script("$(arguments[0]).click()", "#newText")
-        except:
-          driver.execute_script("$(arguments[0]).click()", "#newText")
-          
-        time.sleep(2)
+    cookie = {}
+    uid = driver.get_cookie('__cfduid')['value']
+    sid = driver.get_cookie('connect.sid')['value']
+    cookie['__cfduid'] = uid
+    cookie['connect.sid'] = sid
+    print(cookie)
+    
+    cookies = {
+        '__cfduid': uid,
+        'connect.sid': sid,
+    }
+    headers = {
+        'authority': 'www.textnow.com',
+        'accept': 'application/json, text/javascript, */*; q=0.01',
+        'x-csrf-token': 'yraqsLnx-qfRfOVFEuMwbc0D-pPXO-9K0tLU',
+        'x-requested-with': 'XMLHttpRequest',
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.135 Safari/537.36',
+        'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        'origin': 'https://www.textnow.com',
+        'sec-fetch-site': 'same-origin',
+        'sec-fetch-mode': 'cors',
+        'sec-fetch-dest': 'empty',
+        'referer': 'https://www.textnow.com/messaging',
+        'accept-language': 'zh-CN,zh;q=0.9,en;q=0.8',
+    }
+    data = {
+        "contact_value":self.PHONE_NUMBER,
+        "message":self.MESSAGE
+    }
+    url = 'https://www.textnow.com/api/users/brf2053/messages'
+    response = requests.post(url=url,headers=headers,cookies=cookies,data=data)
+    print(response.text)
+    
 
-        #输入：短信内容
-        try:
-          text_field = driver.find_element_by_id("text-input")
-          if text_field.is_displayed():
-            text_field.click()
-            text_field.send_keys(self.MESSAGE)
-          else:
-            driver.execute_script("arguments[0].scrollIntoView();", text_field)
-            if text_field.is_displayed():
-              text_field.click()
-              text_field.send_keys(self.MESSAGE)
-            else:
-              driver.execute_script("$(arguments[0]).val('arguments[1]')", "#text-input", self.MESSAGE)
-        except:
-            driver.execute_script("$(arguments[0]).val('arguments[1]')", "#text-input", self.MESSAGE)
-        time.sleep(2)
-        
-        #输入号码
-        try:
-          number_field = driver.find_element_by_class_name("newConversationTextField")
-          if number_field.is_displayed():
-            number_field.send_keys(phone)
-          else:
-            driver.execute_script("arguments[0].scrollIntoView();", number_field)
-            if number_field.is_displayed():
-              number_field.send_keys(phone)
-            else:
-              driver.execute_script("$(arguments[0]).val('arguments[1]')", ".newConversationTextField", phone)
-        except:
-            driver.execute_script("$(arguments[0]).val('arguments[1]')", ".newConversationTextField", phone)
-        time.sleep(10)
-
-        #点击短信内容
-        try:
-          text_field = driver.find_element_by_id("text-input")
-          if text_field.is_displayed():
-            text_field.click()
-          else:
-            driver.execute_script("arguments[0].scrollIntoView();", text_field)
-            if text_field.is_displayed():
-              text_field.click()
-            else:
-              driver.execute_script("$(arguments[0]).focus()", "#text-input")
-        except:
-            driver.execute_script("$(arguments[0]).focus()", "#text-input")
-        time.sleep(5)
-          
-        #点击发送按钮
-        try:
-          send_btn = driver.find_element_by_id("send_button")
-          if send_btn.is_displayed():
-            send_btn.click()
-          else:
-            driver.execute_script("arguments[0].scrollIntoView();", send_btn)
-            if send_btn.is_displayed():
-              send_btn.click()
-            else:
-              driver.execute_script("$(arguments[0]).click()", "#send_button")
-              driver.execute_script("setTimeout($(arguments[0]).click,2000)", "#send_button")
-        except:
-          driver.execute_script("$(arguments[0]).click()", "#send_button")
-          driver.execute_script("setTimeout($(arguments[0]).click,2000)", "#send_button")
-        time.sleep(5)
-        
-        #执行页面刷新
-        #try:
-        #  driver.get(self.url.replace('/login','/messaging'))
-        #  
-        #  time.sleep(10)
-        #  # 隐性等待,最长等待30秒
-        #  driver.implicitly_wait(30)
-        #  WebDriverWait(driver, 3).until(EC.visibility_of_element_located((By.XPATH, "//button[@id='newText']")))
-        #  print (u'刷新页面完成')
-        #except:
-        #    pass
-            
-      except:
-        print (u'给%s发短信时发生异常：' % phone)
-        info = sys.exc_info()
-        #print(info)
-        #print(info[0])
-        print(info[1])
-        time.sleep(2)
-        pass
-      continue
-      
-    print (u'处理完毕---end')
+    
     
     driver.quit()
     
