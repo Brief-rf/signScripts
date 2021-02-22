@@ -74,9 +74,7 @@ setup(
         "Operating System :: Microsoft :: Windows",
         "Operating System :: POSIX :: Linux",
         "Programming Language :: Python",
-        "Programming Language :: Python :: 2.7",
-        "Programming Language :: Python :: 3.5",
-        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Topic :: Internet",
@@ -142,6 +140,7 @@ setup(
         'certifi>=2020.6.20',
         'pdfminer.six==20191110;python_version<"3.5"',
         'pdfminer.six==20200517;python_version>="3.5"',
+        'playwright==1.8.0a1'
     ],
     packages=[
         'seleniumbase',
