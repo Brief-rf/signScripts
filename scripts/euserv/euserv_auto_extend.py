@@ -3,7 +3,8 @@ import json
 import time
 import requests
 from bs4 import BeautifulSoup
-from ..textnow.textnow_sms import TextNowBot
+# from ..textnow.textnow_sms import TextNowBot
+from py_scripts.scripts.textnow.textnow_sms import TextNowBot
 from playwright.sync_api import sync_playwright
 
 USERNAME = os.environ["EUSERV_USERNAME"]
