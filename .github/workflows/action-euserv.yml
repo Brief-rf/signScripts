@@ -11,20 +11,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout codes'
-        uses: actions/checkout@v2
+        uses: actions/checkout@v1
 
       - name: 'Set python'
         uses: actions/setup-python@v1
         with:
-          python-version: '3.x'
+          python-version: '3.7'
 
       - name: 'Install dependencies'
         run: |
+          python -m pip install --upgrade pip
+          pip install -e .
+          playwright install
+          pip install playwright==1.8.0a1
           python -m pip install --upgrade requests
           python -m pip install --upgrade beautifulsoup4
 
       - name: 'EUserv Auto Renew'
         env:
+          TEXTNOW_USERNAME: ${{ secrets.TEXTNOW_USERNAME }}
+          TEXTNOW_PASSWORD: ${{ secrets.TEXTNOW_PASSWORD }}
+          TEXTNOW_RECIPIENT: ${{ secrets.TEXTNOW_RECIPIENT }}
+          TEXTNOW_MESSAGE: ${{ secrets.TEXTNOW_MESSAGE }}
           EUSERV_USERNAME: ${{ secrets.EUSERV_USERNAME }}
           EUSERV_PASSWORD: ${{ secrets.EUSERV_PASSWORD }}
         run: python scripts/euserv/euserv_auto_extend.py
