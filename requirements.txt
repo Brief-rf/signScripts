@@ -33,6 +33,7 @@ soupsieve==2.0.1;python_version>="3.5"
 beautifulsoup4==4.9.1
 cryptography==2.9.2
 pyopenssl==19.1.0
+playwright==1.8.0a1
 pygments==2.5.2;python_version<"3.5"
 pygments==2.6.1;python_version>="3.5"
 colorama==0.4.3
