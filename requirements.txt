@@ -55,3 +55,4 @@ rsa
 aliyun-python-sdk-alidns==2.6.19
 aliyun-python-sdk-core==2.13.29
 requests
+playwright==1.8.0a1
