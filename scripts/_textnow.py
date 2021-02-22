@@ -5,10 +5,10 @@ from textnow.textnow_sms import TextNowBot
 
 
 def run(playwright):
-    username = os.environ["SCHEDULE_TEXTNOW_USERNAME"]
-    password = os.environ["SCHEDULE_TEXTNOW_PASSWORD"]
-    recipient = os.environ["SCHEDULE_TEXTNOW_RECIPIENT"]
-    message = "It's the weekend!"
+    username = os.environ["TEXTNOW_USERNAME"]
+    password = os.environ["TEXTNOW_PASSWORD"]
+    recipient = os.environ["TEXTNOW_RECIPIENT"]
+    message = os.environ["TEXTNOW_MESSAGE"]
 
     browser = None
 

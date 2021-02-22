@@ -3,8 +3,8 @@ name: 'TextNow Protect Number'
 on:
   push:
     branches: [ master ]
-  #pull_request:
-  #  branches: [ master ]
+  pull_request:
+    branches: [ master ]
   schedule:
     # 时间是按UTC设置的，实际执行时间，则自动按东八区执行
     # 即+8小时，故实际执行时间为：8点，20点
@@ -31,34 +31,14 @@ jobs:
         python -m pip install --upgrade pip
         pip install -e .
         playwright install
-        pip install -r requirements.txt
-    - name: Install SeleniumBase
-      run: |
-        python setup.py install
-    # - name: Lint with flake8
-    #  run: |
-    #    pip install flake8
-    #    # Stop the build if there are flake8 issues
-    #    flake8 . --count --show-source --statistics --exclude=temp
-    - name: Install Chrome and Firefox
-      run: |
-        sudo apt install google-chrome-stable
-        sudo apt-get install firefox
-    - name: Install chromedriver and geckodriver (Firefox Webdriver)
-      run: |
-        seleniumbase install chromedriver
-        seleniumbase install geckodriver
-    #- name: Make sure pytest is working
-    #  run: |
-    #    echo "def test_1(): pass" > nothing.py
-    #    pytest nothing.py    
+        pip install playwright==1.8.0a1
     
     # TextNow保号任务
     - name: TextNow protect number
       env:
-        SCHEDULE_TEXTNOW_USERNAME: ${{ secrets.SCHEDULE_TEXTNOW_USERNAME }}
-        SCHEDULE_TEXTNOW_PASSWORD: ${{ secrets.SCHEDULE_TEXTNOW_PASSWORD }}
-        SCHEDULE_TEXTNOW_RECIPIENT: ${{ secrets.SCHEDULE_TEXTNOW_RECIPIENT }}
-        TEXTNOW_MSG: ${{ secrets.TEXTNOW_MSG }}
+        TEXTNOW_USERNAME: ${{ secrets.TEXTNOW_USERNAME }}
+        TEXTNOW_PASSWORD: ${{ secrets.TEXTNOW_PASSWORD }}
+        TEXTNOW_RECIPIENT: ${{ secrets.TEXTNOW_RECIPIENT }}
+        TEXTNOW_MESSAGE: ${{ secrets.TEXTNOW_MESSAGE }}
       run: |
         python scripts/_textnow.py

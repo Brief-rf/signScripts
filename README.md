@@ -14,12 +14,12 @@ python脚本集，有原创的，也有站在巨人的肩膀上做的修改版�
 
 当前功能：
 
-1. [TextNow保号](<https://github.com/Arronlong/py_scripts/tree/master/scripts/textnow>)
-2. [HostLoc赚积分【基于SeleniumBase】](<https://github.com/Arronlong/py_scripts/tree/master/scripts/hostloc>)（[模拟登陆](https://github.com/Arronlong/py_scripts/blob/master/scripts/hostloc/README_py_login.md)和[基于cookie](https://github.com/Arronlong/py_scripts/blob/master/scripts/hostloc/README_py_cookie.md)的脚本均已失效）
-3. [天翼云盘签到+抽奖](<https://github.com/Arronlong/py_scripts/tree/master/scripts/C189>)
-4. [EUserv续订](<https://github.com/Arronlong/py_scripts/tree/master/scripts/euserv>)
-5. [自动更新DNS智能解析为CF优质IP](<https://github.com/Arronlong/py_scripts/tree/master/scripts/cf2dns>)
-6. [Freenom 域名续期](<https://github.com/Arronlong/py_scripts/tree/master/scripts/freenom>)
+1. [TextNow保号](<https://github.com/Brief-rf/py_scripts/tree/master/scripts/textnow>)
+2. [HostLoc赚积分【基于SeleniumBase】](<https://github.com/Brief-rf/py_scripts/tree/master/scripts/hostloc>)（[模拟登陆](https://github.com/Arronlong/py_scripts/blob/master/scripts/hostloc/README_py_login.md)和[基于cookie](https://github.com/Arronlong/py_scripts/blob/master/scripts/hostloc/README_py_cookie.md)的脚本均已失效）
+3. [天翼云盘签到+抽奖](<https://github.com/Brief-rf/py_scripts/tree/master/scripts/C189>)
+4. [EUserv续订](<https://github.com/Brief-rf/py_scripts/tree/master/scripts/euserv>)
+5. [自动更新DNS智能解析为CF优质IP](<https://github.com/Brief-rf/py_scripts/tree/master/scripts/cf2dns>)
+6. [Freenom 域名续期](<https://github.com/Brief-rf/py_scripts/tree/master/scripts/freenom>)
 
 功能对应的参数，请点击后自行查看。
 
